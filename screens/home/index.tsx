@@ -1,22 +1,37 @@
-import { Text, TextInput, TouchableOpacity, View, ScrollView, FlatList } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, ScrollView, FlatList, Alert } from 'react-native';
 import { useState } from 'react';
 import { styles } from './syle';
 import { Participant } from '@/components/Participants';
 
 
 export function Home() {
-    const [name, setName] = useState('teste')
+    const [name, setName] = useState('')
     const [nameList, setNameList] = useState(['Ana', 'José'])
 
     const handleParticipantAdd = () => {
         if (name === undefined || name.trim() === '') {
             return
         }
-        //setNameList([...nameList, name])
+
+        if (nameList.includes(name)) {
+            Alert.alert('Parcicipannte existe', 'O participante já foi adicionado')
+            return
+        }
+        setNameList([...nameList, name])
     }
 
     const handleParticipantDelete = (name: string) => {
-
+        Alert.alert('Remover',`Deseja mesmo remover ${name}?`,[
+            {
+                text:'Sim',
+                onPress: () => Alert.alert('apagou')
+            },
+            {
+                text:'Não',
+                style: 'cancel'
+            }
+        ]
+        )
     }
 
     return (

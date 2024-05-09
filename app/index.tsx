@@ -1,8 +1,11 @@
 import { Home } from "@/screens/home";
-
+import { StatusBar } from "react-native";
 
 export default function Index() {
   return (
-   <Home/>
+    <>
+      <StatusBar barStyle='light-content'/>
+      <Home />
+    </>
   );
 }
