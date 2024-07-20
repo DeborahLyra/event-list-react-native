@@ -18,6 +18,7 @@ export function Home() {
             return
         }
         setNameList([...nameList, name])
+        setName('')
     }
 
     const handleParticipantDelete = (name: string) => {
