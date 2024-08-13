@@ -6,7 +6,7 @@ import { Participant } from '@/components/Participants';
 
 export function Home() {
     const [name, setName] = useState('')
-    const [nameList, setNameList] = useState(['Ana', 'José'])
+    const [nameList, setNameList] = useState<string[]>([])
 
     const handleParticipantAdd = () => {
         if (name === undefined || name.trim() === '') {
@@ -14,10 +14,10 @@ export function Home() {
         }
 
         if (nameList.includes(name)) {
-            Alert.alert('Parcicipannte existe', 'O participante já foi adicionado')
+            Alert.alert('Parcicipannte existe', `${name} já foi adicionado(a)`)
             return
         }
-        setNameList([...nameList, name])
+        setNameList(prevState =>[...prevState, name])
         setName('')
     }
 
@@ -25,7 +25,7 @@ export function Home() {
         Alert.alert('Remover',`Deseja mesmo remover ${name}?`,[
             {
                 text:'Sim',
-                onPress: () => Alert.alert('apagou')
+                onPress: () => setNameList(prevstate => prevstate.filter(participant => participant !== name))
             },
             {
                 text:'Não',
